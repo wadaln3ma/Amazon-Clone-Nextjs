@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 
+.link{
+  @apply cursor-pointer hover:underline;
+}
