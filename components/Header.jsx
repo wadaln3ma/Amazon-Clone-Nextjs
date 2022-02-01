@@ -1,12 +1,15 @@
 import Image from "next/image"
-import { MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
+import { LoginIcon, LogoutIcon, MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Header = ()=>{
+  const { data : session } = useSession()
+
   return (
     <header>
       {/*header top*/}
       <div className="bg-amazon_blue flex items-center flex-grow p-1 py-2">
-        <div className="flex items-center flex-grow mt-2 mr-4 sm:flex-grow-0">
+        <div className="flex items-center flex-grow mt-2 sm:flex-grow-0">
           <Image alt="" src={"/images/Amazon_logo.svg"} height={40} width={150}
             objectFit="contain"
             className="cursor-pointer" />
@@ -18,9 +21,13 @@ const Header = ()=>{
         </div>
 
         <div className="flex items-center mx-6 space-x-6 text-xs text-white whitespace-nowrap">
-          <div className="link">
-            <p>Hello Abdulrahmn</p>
-            <p className="font-extrabold md:text-sm">{'Account & Lists'}</p>
+          <div onClick={session ? signOut : signIn } className="link">
+            <p>
+              {!session ?  <div className="flex items-center">Login {<LoginIcon className="h-6 ml-1"/>}</div>
+              :
+              <div className="flex items-center text-xs">Hello, {session.user?.name.split(' ')[0]} <LogoutIcon className="h-3 ml-1"/> </div> }
+            </p>
+            <p className="font-extrabold text-xs md:text-sm">{'Account & Lists'}</p>
           </div>
           <div className="link">
             <p>Returns</p>
