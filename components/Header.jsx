@@ -1,9 +1,12 @@
 import Image from "next/image"
 import { LoginIcon, LogoutIcon, MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import {useSelector} from "react-redux"
 
 const Header = ()=>{
   const { data : session } = useSession()
+
+  const basket = useSelector(state => state.basket.value)
 
   return (
     <header>
@@ -35,7 +38,7 @@ const Header = ()=>{
           </div>
           <div className="link relative flex items-center">
             <span className="absolute h-4 w-4 right-0 top-0 sm:right-10 bg-yellow-400 text-black text-center font-bold rounded-full">
-              0
+              { basket.length }
             </span>
             <ShoppingCartIcon className="h-10" />
             <p className="font-extrabold md:text-sm hidden md:inline mt-2">Basket</p>
