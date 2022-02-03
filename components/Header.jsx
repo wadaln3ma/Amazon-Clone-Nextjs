@@ -2,9 +2,11 @@ import Image from "next/image"
 import { LoginIcon, LogoutIcon, MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import {useSelector} from "react-redux"
+import { useRouter } from 'next/router'
 
 const Header = ()=>{
   const { data : session } = useSession()
+  const router = useRouter()
 
   const basket = useSelector(state => state.basket.value)
 
@@ -12,7 +14,7 @@ const Header = ()=>{
     <header>
       {/*header top*/}
       <div className="bg-amazon_blue flex items-center flex-grow p-1 py-2">
-        <div className="flex items-center flex-grow mt-2 sm:flex-grow-0">
+        <div onClick={()=> router.push('/')} className="flex items-center flex-grow mt-2 sm:flex-grow-0">
           <Image alt="" src={"/images/Amazon_logo.svg"} height={40} width={150}
             objectFit="contain"
             className="cursor-pointer" />
@@ -36,7 +38,7 @@ const Header = ()=>{
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">{'& Orders'}</p>
           </div>
-          <div className="link relative flex items-center">
+          <div onClick={()=> router.push('/checkout')} className="link relative flex items-center">
             <span className="absolute h-4 w-4 right-0 top-0 sm:right-10 bg-yellow-400 text-black text-center font-bold rounded-full">
               { basket.length }
             </span>

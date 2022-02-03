@@ -14,8 +14,8 @@ const ProductItem = ({ id, title, price, description,category, image })=>{
 
   
   const addProductToBasket = ()=>{
-    const product = { id, title, price, description,category, image }
-    dispatch(addToBasket(product))
+    const item = { id, title, price, rating, description,category, image, hasPrime }
+    dispatch(addToBasket(item))
   }
 
   const [rating] = useState(
