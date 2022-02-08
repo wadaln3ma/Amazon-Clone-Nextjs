@@ -4,12 +4,31 @@ import Header from '../components/Header'
 import CheckoutItem from '../components/CheckoutItem'
 import {useSession} from 'next-auth/react'
 import Currecncy from 'react-currency-formatter'
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+const stripePromise = loadStripe(process.env.stripe_public_key)
 
 const Checkout = ()=>{
   const products = useSelector(state => state.basket.value)
   const total = products.reduce((total, item) => total + item.price, 0)
   const {data : session} = useSession()
-  
+
+  const createCheckoutSession = async ()=>{
+    const stripe = await stripePromise
+
+    const checkoutSession = await axios.post('/api/create-checkout-session', {
+      products,
+      email : session.user.email,
+    })
+
+    const result = await stripe.redirectToCheckout({
+            sessionId: checkoutSession.data.id,
+        });
+
+        if (result.error) {
+            alert(result.error.message);
+        }
+  }
   return (
     <div className="bg-gray-100">
       <Header />
@@ -26,9 +45,9 @@ const Checkout = ()=>{
             <h1 className="text-xl sm:text-3xl border-b pb-3 font-bold">
               { products.length === 0 ? 'Your Shopping Cart is Empty' : 'Shopping Cart' }
             </h1>
-          
+
           { products.map(({id, title, price, rating, description,category, image, hasPrime}, i) =>(
-              <CheckoutItem key={i} 
+              <CheckoutItem key={i}
                             id={id}
                             title={title}
                             price={price}
@@ -54,6 +73,8 @@ const Checkout = ()=>{
                 </span>
               </h2>
               <button
+                    role="link"
+                    onClick={createCheckoutSession}
                     disabled={!session}
                     className={`mt-2 ${session ? 'btn' : 'btn_disabled'}`} >
                         {!session ? "Sign in to checkout"

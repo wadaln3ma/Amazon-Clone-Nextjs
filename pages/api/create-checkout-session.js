@@ -3,10 +3,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const handler = async(req, res)=>{
 
     const { products, email } = req.body
-    
-    console.log(email)
-    console.log(products)
-
 
     const transformedItems = Object.values(products).map(item => ({
         description : item.description,
@@ -20,20 +16,17 @@ const handler = async(req, res)=>{
             },
         },
     }))
-    
-    console.log(transformedItems)
-
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         shipping_rates: ["shr_1KPGukK3wq9Dt87tnBRD8bNB"],
         shipping_address_collection: {
-            allowed_countries: ["AE", "SN", "SA","GB", "US", "CA", "FR"],
+            allowed_countries: ["AE", "SA","GB", "US", "CA", "FR"],
         },
         line_items: transformedItems,
         mode: "payment",
-        success_url: `${process.env.HOST}/success`,
-        cancel_url: `${process.env.HOST}/checkout`,
+        success_url: `${req.headers.origin}/success`,
+        cancel_url: `${req.headers.origin}/checkout`,
         metadata: {
             email,
             images: JSON.stringify(products.map((item)=> item.image)),
