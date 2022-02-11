@@ -1,14 +1,26 @@
 import { buffer } from 'micro'
 import admin from 'firebase-admin'
 
-const serviceAccount = require('../../../firebase-permissions.json')
+const serviceAccount = {
+  "type": "service_account",
+  "project_id": "amazn-clone-nextjs",
+  "private_key_id": process.env.FIREBASE_ADMIN_PV_KEY_ID,
+  "private_key": process.env.FIREBASE_ADMIN_PV_KEY,
+  "client_email": "firebase-adminsdk-ou23r@amazn-clone-nextjs.iam.gserviceaccount.com",
+  "client_id": process.env.FIREBASE_ADMIN_CLIENT_ID,
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ou23r%40amazn-clone-nextjs.iam.gserviceaccount.com"
+}
 
-const app = !admin.apps.length ?
-            admin.initializeApp({credential : admin.credential.cert(serviceAccount)}) :
-            admin.app()
+const app = !admin.apps.length ? admin.initializeApp({ credential: admin.credential.cert(serviceAccount)})
+: admin.app()
+
+const db = admin.firestore()
 
 const fulfillOrder = async (session)=>{
-    return app.firestore()
+    return db
             .collection('users')
             .doc(session.metadata.email)
             .collection('orders')
@@ -43,7 +55,6 @@ export default async function handler(req, res){
 
     if(event.type === 'checkout.session.completed'){
         const session = event.data.object
-
 
         return fulfillOrder(session)
                 .then(()=> res.status(200))

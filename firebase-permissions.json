@@ -1,10 +1,10 @@
 {
   "type": "service_account",
   "project_id": "amazn-clone-nextjs",
-  "private_key_id": "83418669ded34b26476c5e4396683907024bfb8e",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDhlJIOu6QfJ6Sz\nLdUQhZYwhcLCMMaNYq0tYMacR6HWSxXqjMyedNp23BgYLbGedrdDHEZAqbC696yr\nm95638a7OG3uzZysWpOatBcVK9FIyyX5m7uGlnh5sl2poMaZAt+TU64OdPMwNOgS\ndLsAf9BNNawk0nYKFD09C4J3EQFI0gPfa99QzqamtaeetjKloR4eszISTcnxiGKI\nM5Gwf3GXRTiACqYhE1XatpJMXFb1ZPhQFEMzDHjt6r4XxbpfS2NoAzPxiBgbwm0E\nefa74tLqzptl+z7+fbdkMccFNqhCrzJLzXnoieNERiQmkpX2yEkevS+wLP2VSJzo\nE0u/5ChFAgMBAAECgf9N+46CiVuzaYEGcFG35HaHT7aEa1g4iGRVy57dZ+YKrupk\nq0gRf1QGww+RTDqbDW9NQ/kFYaQ2/mgy6y9+St3o2xkl9O60pptgX+Ga8Arpn1EB\neVTasinz6DV47pu5ScUAqW0Ckmt/vsp7lt8OzSC1kFhyYk9sLJL/B3uSrc5D3bA6\n21H9kgiJu1v13cHyTnmx26jMfO7JPVeGOoAFD3ir2uo8c5qkFk0kCR1SjFmZZqLy\nRDN01G1bG7aEitvmfBFhyTmEjlgzpai6GR5lVJxJTDXGm0nDnpJ7zrPcS0oavYeA\nruOnuT3wZRQMRHLY3MsFChBoyHHHKVt34Va7KjECgYEA+GvU67X9zsy0p8TjM+f9\nuU3nW9pFfcZJhTODbQjiGUzelPH2liTVGGt2pVqVKjnoXcXkaR6tLAwSrheqJekr\n0AnXd76dXAHegjBxP5al6uER5+tLca0/G7OwD6ddkArV5qI0SWUfUu3d6vkxnoS0\nSzmLdV/E7yJWl5XvY5t3ZmkCgYEA6HZaD4biIUzxYxddNj4tBVqt4sg9JFM+fo5W\nZne19UUeEqh/jYxSp827kjyEJRL8pRsZuw/xt1+ScIo3aq77gmXTM11+qI2e5WhD\nA9F/a1DfbGWFrGz9/zAhuFO7u/JWvTgrlMcRMGjQTwmqvULlTcjAq//avUc/uy69\nxo3/D30CgYBKGvCzN+D0tcAWY/da3pOjmYewsNYWBPadk5ZbClFYNsQXLm7erzIa\nTMRh4zmoFQoqHwRaD1qdTySrZkfNc1csgiMSh3wtnCkiMQ03aNspy+YphtlEmee/\nfcTBhq20cGcKm8x5MH89n9OZaqjQnsmhvxLI+r6mj1nBcmqtDg16MQKBgQC9x+G+\ny1/Rz/9B5tEyd5BJzr4nZ1KDVXKv34SqIxFqLANhOC7qYKUaWdvIh59apSWdpYJc\nNaghDOWA+1ZCwpiS3I6QYMQG15fhsj0D4QUll+DPnhKDsneq3qCo27NovXATCsiJ\nrftaijeGT14VJYgO+NZTlY3++SwOpRpJ/6M8AQKBgQCkPxQilN793v3NIFnPFBVV\nAcMx/Og0RDJUs/6yvA0ujOuq+9kTuUWoV2nSQwxym3+YVuGz0wFriyeR2aeI6Bbl\nQ5mJfzs6mUwBZ7LYZZa7ATtTptsB3ZyFMc2Kt1s4a7CEr8Q/vR+Lb+p53v5xTR7S\nOYFcaKsdPF+0uBWHSNXF/g==\n-----END PRIVATE KEY-----\n",
+  "private_key_id": process.env.FIREBASE_ADMIN_PV_KEY_ID,
+  "private_key": process.env.FIREBASE_ADMIN_PV_KEY,
   "client_email": "firebase-adminsdk-ou23r@amazn-clone-nextjs.iam.gserviceaccount.com",
-  "client_id": "117608619415865925813",
+  "client_id": process.env.FIREBASE_ADMIN_CLIENT_ID,
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",

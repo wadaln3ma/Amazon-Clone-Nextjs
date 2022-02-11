@@ -6,7 +6,7 @@ import axios from 'axios'
 import { getSession } from 'next-auth/react'
 
 export default function Home({ products }) {
-  
+
   return (
     <div className="bg-gray-100">
       <Head>
@@ -33,7 +33,7 @@ export const getServerSideProps = async (context)=>{
 
   const products = await axios.get(BASE_URL)
                               .then(res => res.data)
-  
+
 
   return {
     props :{
