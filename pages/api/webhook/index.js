@@ -1,11 +1,13 @@
 import { buffer } from 'micro'
 import admin from 'firebase-admin'
 
+const { privateKey } = JSON.parse(process.env.FIREBASE_ADMIN_PV_KEY)
+
 const serviceAccount = {
   "type": "service_account",
   "project_id": "amazn-clone-nextjs",
   "private_key_id": process.env.FIREBASE_ADMIN_PV_KEY_ID,
-  "private_key": process.env.FIREBASE_ADMIN_PV_KEY,
+  "private_key": privateKey,
   "client_email": "firebase-adminsdk-ou23r@amazn-clone-nextjs.iam.gserviceaccount.com",
   "client_id": process.env.FIREBASE_ADMIN_CLIENT_ID,
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
